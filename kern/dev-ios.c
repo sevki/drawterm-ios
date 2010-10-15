@@ -11,6 +11,9 @@
 typedef struct Accelinfo Accelinfo;
 typedef struct Locationinfo Locationinfo;
 typedef struct Headinginfo Headinginfo;
+typedef struct Touchesinfo Touchesinfo;
+typedef struct Touch Touch;
+typedef struct Caminfo Caminfo;
 
 struct Accelinfo
 {
@@ -37,15 +40,51 @@ struct Headinginfo
 	float mag, tru, accuracy;
 };
 
+struct Touchesinfo
+{
+	Lock  lk;
+	Touch *lst;
+	int n, idx;
+	int open;
+	
+	// buffered touch infos
+	char **buffered;
+	int pending, pendinglen;
+
+	char *str;
+};
+
+struct Caminfo
+{
+	Lock lk;
+	Rendez r;
+	int open, changed;
+	char *failstr;
+	
+	char *dat, *p;
+	int len;
+};
+
+struct Touch // shared with the ios device driver
+{
+	float x,y;
+	int used;
+	void *tid;
+};
+
 static Accelinfo accel;
 static Locationinfo location;
 static Headinginfo heading;
+static Touchesinfo touches;
+static Caminfo cam;
 
 enum{
 	Qdir,
 	Qaccel,
 	Qlocation,
 	Qheading,
+	Qtouches,
+	Qcam,
 };
 
 Dirtab iosdir[]={
@@ -53,7 +92,8 @@ Dirtab iosdir[]={
 	"accel",	{Qaccel},	0,			0444,
 	"location",	{Qlocation},0,			0444,
 	"heading",  {Qheading}, 0,			0444,
-	
+	"touches",  {Qtouches}, 0,			0444,
+	"cam",		{Qcam},		0,			0444,
 };
 
 #define	NIOS	(sizeof(iosdir)/sizeof(Dirtab))
@@ -62,10 +102,78 @@ Dirtab iosdir[]={
 
 void loglocation(); // startup.m
 void logheading(); // startup.m
+void startcam(); // startup.m
 
 static int accelchanged(void *a);
 static int locationchanged(void *a);
 static int headingchanged(void *a);
+static int camchanged(void *a);
+
+Touch *touchset(int *n); // retrieve current set of touches
+
+static char*
+nexttouch()
+{
+	Touch *lst;
+	int n, i, j;
+	char *buf;
+	
+	lock(&touches.lk);
+
+	if (touches.pending) {
+		buf = touches.buffered[--touches.pending];
+		unlock(&touches.lk);
+		return buf;
+	}
+	
+	lst = touchset(&n);
+	if (touches.pendinglen < n) {
+		int start = touches.pendinglen;
+		touches.pendinglen = n + touches.n; // new + possible old release
+		touches.buffered = realloc(touches.buffered, touches.pendinglen *sizeof(void*));
+		for (i = start; i < touches.pendinglen; i++)
+			touches.buffered[i] = malloc(1 + 2*12 + 6);
+	}
+	touches.pending = n;
+	for (i = 0; i < touches.pending; i++) // U == used, A == available
+		sprint(touches.buffered[i], "%c %11f %11f %x\n", lst[i].used ? 'U' : 'A', lst[i].x, lst[i].y, lst[i].tid); 
+
+	if (touches.lst) {
+		for (i = 0; i < touches.n; i++) {
+			for (j = 0; i < n; j++)
+				if (touches.lst[i].tid == lst[j].tid)
+					break;
+			if (touches.lst[i].tid != lst[j].tid) {
+				// delete this touch
+				sprint(touches.buffered[touches.pending++], "D %11f %11f %x\n", touches.lst[i].x, touches.lst[i].y, touches.lst[i].tid);
+			}
+		}
+		free(touches.lst);
+	}
+	touches.lst = lst;
+	touches.n = n;
+
+	if (touches.pending == 0)
+		buf = nil;
+	else
+		buf = touches.buffered[--touches.pending];
+	
+	unlock(&touches.lk);
+	return buf;
+}
+		 
+
+void starttouches()
+{
+	lock(&touches.lk);
+}
+
+void endtouches()
+{
+	unlock(&touches.lk);
+}
+
+
 
 static Chan*
 iosattach(char *spec)
@@ -93,6 +201,41 @@ iosopen(Chan *c, int omode)
 		if(omode != OREAD)
 			error(Eperm);
 		break;
+	case Qcam:
+			if (omode != OREAD)
+				error(Eperm);
+			lock(&cam.lk);
+			if (cam.open) {
+				unlock(&cam.lk);
+				error(Einuse);
+			}
+			cam.open = 1;
+			unlock(&cam.lk);
+			// open blocks until we got the image...or not
+			startcam();
+			while (!camchanged(0))
+				sleep(&cam.r, camchanged, 0);
+			lock(&cam.lk);
+			cam.changed = 0;
+			if (cam.failstr) {
+				cam.open = 0;
+				unlock(&cam.lk);
+				printf("failstr: %s\n", cam.failstr);
+				error(cam.failstr);
+			}
+			unlock(&cam.lk);
+
+			break;
+	case Qtouches:
+			if (omode != OREAD)
+				error(Eperm);
+			lock(&touches.lk);
+			if (touches.open) {
+				unlock(&touches.lk);
+				error(Einuse);
+			}
+			touches.open = 1;
+			unlock(&touches.lk);
 	case Qaccel:
 			if (omode != OREAD)
 				error(Eperm);
@@ -151,6 +294,8 @@ iosopen(Chan *c, int omode)
 void
 iosclose(Chan *c)
 {
+	int i;
+	
 	if(!(c->flag&COPEN))
 		return;
 
@@ -170,6 +315,27 @@ iosclose(Chan *c)
 			heading.open = 0;
 			unlock(&heading.lk);
 			break;
+		case Qcam:
+			lock(&cam.lk);
+			cam.open = 0;
+			unlock(&cam.lk);
+			break;
+		case Qtouches:
+			lock(&touches.lk);
+			touches.open = 0;
+			if (touches.lst) {
+				free(touches.lst);
+				touches.n = 0;
+			}
+			if (touches.pendinglen) {
+				for (i = 0; i < touches.pendinglen; i++)
+					free(touches.buffered[i]);
+				free(touches.buffered);
+				touches.pendinglen = 0;
+			}
+			touches.pending = 0;
+			unlock(&touches.lk);
+			break;
 	}
 }
 
@@ -177,15 +343,33 @@ iosclose(Chan *c)
 long
 iosread(Chan *c, void *va, long n, vlong offset)
 {
-	char buf[5*12+1];
+	char buf[10001];
 	// XXX: why not write directly into va?
 	uchar *p;
 	int len;
+	char *s;
 	
 	p = va;
 	switch((long)c->qid.path){
 		case Qdir:
 			return devdirread(c, va, n, iosdir, NIOS, devgen);
+		case Qtouches:
+			while ((s = nexttouch()) == nil); // XXX: this is a pretty hot loop...
+			if (n > strlen(s))
+				n = strlen(s);
+			memmove(va, s, n);
+			return n;
+		case Qcam:
+			lock(&cam.lk);
+			if (n > cam.len)
+				n = cam.len;
+			if (n > 10000)
+				n = 10000;
+			memmove(va, cam.p, n);
+			cam.p += n;
+			cam.len -= n;
+			unlock(&cam.lk);
+			return n;
 		case Qaccel:
 			while (!accelchanged(0))
 				sleep(&accel.r, accelchanged, 0);
@@ -245,6 +429,12 @@ ioswrite(Chan *c, void *va, long n, vlong offset)
 	switch((long)c->qid.path){
 	case Qdir:
 		error(Eisdir);
+	case Qtouches:
+		panic("shouldn't be able to write on Qtouches");
+		break;
+	case Qcam:
+		panic("shouldn't be able to write on Qcam");
+		break;
 	case Qaccel:
 		panic("shouldn't be able to write on Qaccel");
 		break;
@@ -259,7 +449,6 @@ ioswrite(Chan *c, void *va, long n, vlong offset)
 	error(Egreg);
 	return -1;
 }
-
 
 static int
 accelchanged(void *a)
@@ -281,6 +470,13 @@ headingchanged(void *a)
 {
 	USED(a);
 	return heading.changed;
+}
+
+static int
+camchanged(void *a)
+{
+	USED(a);
+	return cam.changed;
 }
 
 void
@@ -308,6 +504,21 @@ sendlocation(float x, float y, float altitude, float haccuracy, float vaccuracy,
 	location.changed = 1;
 	unlock(&location.lk);
 	wakeup(&location.r);
+}
+
+void
+sendcam(void *dat, int len, char *failed)
+{
+	lock(&cam.lk);
+	if (cam.dat)
+		free(cam.dat);
+	cam.dat = dat;
+	cam.p = dat;
+	cam.len = len;
+	cam.failstr = failed;
+	cam.changed = 1;
+	unlock(&cam.lk);
+	wakeup(&cam.r);
 }
 
 void

@@ -22,6 +22,8 @@ void screen_touch_began(void* touchid, float x, float y);
 void sendaccel(float x, float y, float z);
 void sendlocation(float x, float y, float altitude, float haccuracy, float vaccuracy, int failed); // Coordinates in WGS84
 void sendheading(float magheading, float trueheading, float accuracy, int failed);
+void sendcam(void *dat, int len, char *failed);
+
 
 extern const char *userpass;
 
@@ -909,6 +911,11 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 	[super sendEvent:event];
 }
 
+- (void)getPicker
+{
+	[self addSubview:bitpicker.view];	
+}
+
 @end
 void
 loglocation()
@@ -923,7 +930,21 @@ logheading()
 	// XXX: some devices don't have a compass. we should fail here right away
 }
 
-@interface App : UIApplication <UIAccelerometerDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate> {
+void
+startcam()
+{
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
+	[[NSRunLoop mainRunLoop] performSelector: @selector(getPicker)
+									  target: window
+									argument: nil
+									   order:0
+									   modes:[NSArray arrayWithObject: NSRunLoopCommonModes]]; //NSDefaultRunLoopMode]];
+	[pool release];
+}
+
+
+@interface App : UIApplication <UIAccelerometerDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 }
 @end
 
@@ -971,6 +992,22 @@ logheading()
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	NSLog(@"didFinish picking with info\n");
+	[picker.view removeFromSuperview];
+
+	
+	UIImage *img = (UIImage *)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
+	//CGImageRef i = img.CGImage;
+//	printf("%i//%i\n", CGImageGetWidth(i), CGImageGetHeight(i));
+	
+	NSData *dat = UIImagePNGRepresentation(img);
+	
+	if (dat.length) {
+		char *copy = malloc(dat.length);
+		memmove(copy, dat.bytes, dat.length);
+		sendcam(copy, dat.length, nil);
+	} else {
+		sendcam(nil, 0, "couldn't acquire picture.");
+	}
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker
@@ -978,15 +1015,20 @@ logheading()
 				  editingInfo:(NSDictionary *)editingInfo
 {
 	NSLog(@"didFinish picking\n");
+
+	
+	[picker.view removeFromSuperview];
+
+	
+	sendcam(nil, 0, "finish -- should be deprecated really...");
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-	NSLog(@"didCancel picking\n");
-	
-	
+{	
 	[picker.view removeFromSuperview];
+	sendcam(nil, 0, "cancel picking");
 }
+
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {  
     window = [[TermWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -1005,9 +1047,6 @@ logheading()
 
 	
 	CGRect r = [[UIScreen mainScreen] bounds];
-	//r.origin.y = 25;
-	//r.size.height -= 25;
-	//r.size.height = 200;
 	uiview = [[TermView alloc] initWithFrame:r];
 	[window addSubview: uiview];
 
@@ -1022,12 +1061,11 @@ logheading()
 	[window addSubview:[navcont view]];
 
 
-	//bitpicker = [[UIImagePickerController alloc] init];
-	//bitpicker.delegate = self;
-//    bitpicker.sourceType = UIImagePickerControllerSourceTypeCamera; //UIImagePickerControllerSourceTypePhotoLibrary;
+	bitpicker = [[UIImagePickerController alloc] init];
+	bitpicker.delegate = self;
+    bitpicker.sourceType = UIImagePickerControllerSourceTypeCamera; //UIImagePickerControllerSourceTypePhotoLibrary;
     //bitpicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 
-//	[window addSubview:bitpicker.view];
 	//[window presentModalViewController:bitpicker animated:YES];
 
     [window makeKeyAndVisible];
