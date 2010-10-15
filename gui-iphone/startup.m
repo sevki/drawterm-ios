@@ -10,6 +10,8 @@ int chartorune(Rune *rune, const char *str);
 NSPort *updateport = nil;
 UIView *uiview = nil;
 static CLLocationManager *locMgr;
+static UIImagePickerController *bitpicker;
+static UIWindow *window;
 
 void screen_keystroke(const char *s);
 void screen_touch_moved(void *touchid, float x, float y);
@@ -31,12 +33,9 @@ int dt_main(int argc, char *argv[]);
 }
 @end
 
-
-@interface TermView : UITextField <UITextFieldDelegate>
+@interface TermViewDelegate : NSObject <UITextFieldDelegate>
 {
 }
-- (void) pleaseRedraw;
-//- (BOOL)canBecomeFirstResponder;
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
 - (void)textFieldDidEndEditing:(UITextField *)textField;
@@ -44,8 +43,16 @@ int dt_main(int argc, char *argv[]);
 - (BOOL)textFieldShouldClear:(UITextField *)textField;
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
+- (void)keyboardInputChanged:(id)sender;	
+@end
 
-- (void)keyboardInputChanged:(id)sender;
+
+
+@interface TermView : UITextField <UITextFieldDelegate>
+{
+}
+- (void) pleaseRedraw;
+//- (BOOL)canBecomeFirstResponder;
 
 @end
 
@@ -98,7 +105,7 @@ int dt_main(int argc, char *argv[]);
 - (id)initWithFrame:(CGRect)r
 {
 	self = [super initWithFrame:r];
-	[self setDelegate:self];
+	[self setDelegate: [[TermViewDelegate alloc] init]];
 	self.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.multipleTouchEnabled = YES;
 	//self.exclusiveTouch = YES;
@@ -129,6 +136,10 @@ int dt_main(int argc, char *argv[]);
 	//NSLog(@"pleaseRedraw\n");
 	[self setNeedsDisplay];
 }
+
+@end
+
+@implementation TermViewDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {	
@@ -906,7 +917,7 @@ loglocation()
 }
 
 
-@interface App : UIApplication <UIAccelerometerDelegate, CLLocationManagerDelegate> {
+@interface App : UIApplication <UIAccelerometerDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate> {
 }
 @end
 
@@ -942,8 +953,28 @@ loglocation()
 	sendaccel(sinf(deg2rad(rot)), cosf(deg2rad(rot)), 0.0);
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+	NSLog(@"didFinish picking with info\n");
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+        didFinishPickingImage:(UIImage *)image
+				  editingInfo:(NSDictionary *)editingInfo
+{
+	NSLog(@"didFinish picking\n");
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+	NSLog(@"didCancel picking\n");
+	
+	
+	[picker.view removeFromSuperview];
+}
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application {  
-    UIWindow *window = [[TermWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    window = [[TermWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
 #if TARGET_IPHONE_SIMULATOR
 	[NSTimer scheduledTimerWithTimeInterval:1.0/10.0 target:self selector:@selector(simulatedAccel) userInfo:nil repeats:YES];
@@ -978,6 +1009,15 @@ loglocation()
 	ConViewController *rootViewController = [[ConViewController alloc] initWithStyle:UITableViewStylePlain];
 	UINavigationController *navcont = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 	[window addSubview:[navcont view]];
+
+	
+	//bitpicker = [[UIImagePickerController alloc] init];
+	//bitpicker.delegate = self;
+//    bitpicker.sourceType = UIImagePickerControllerSourceTypeCamera; //UIImagePickerControllerSourceTypePhotoLibrary;
+    //bitpicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+//	[window addSubview:bitpicker.view];
+	//[window presentModalViewController:bitpicker animated:YES];
 
     [window makeKeyAndVisible];
 
