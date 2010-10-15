@@ -25,6 +25,11 @@
 
 #define UNIMPL {printf("UNIMPL CALL: %s\n",__PRETTY_FUNCTION__);}
 
+enum {
+	Maxtouches = 20,
+	Wheelstep = 5, // how many pixels until new scroll event is sent
+};
+
 extern Cursorinfo cursor;
 
 typedef struct touch touch;
@@ -37,10 +42,19 @@ struct pt
 	float x,y;
 };
 
-struct touch
+struct touch // internal to screen.m
 {
 	float x,y;
 	int inview;
+	int used;
+	void *tid;
+};
+
+typedef struct Touch Touch;
+struct Touch // shared with the ios device driver
+{
+	float x,y;
+	int used;
 	void *tid;
 };
 
@@ -119,7 +133,26 @@ touch touches[20]; // 20..just a ridiculous number XXX: should make checks anywa
 int ntouches = 0;
 
 void sendbuttons(int b, int x, int y);
+void starttouches(); // basically a critical section for work on multitouch
+void endtouches();
 
+Touch *
+touchset(int *n)
+{
+	int i;
+	Touch *lst;
+	
+	*n = ntouches;
+	lst = malloc(ntouches * sizeof(Touch));
+	for (i = 0; i < ntouches; i++) {
+		lst[i].x = touches[i].x;
+		lst[i].y = touches[i].y;
+		lst[i].used = touches[i].used;
+		lst[i].tid = touches[i].tid;
+	}
+
+	return lst;
+}
 
 static void screen_invalidate()
 {
@@ -186,19 +219,60 @@ checkmouse()
 	return 0;
 }
 
+static void
+end()
+{
+	int i;
+	
+	// update touch usage
+	for (i = 0; i < ntouches; i++)
+			touches[i].used = 0;
+	
+	switch (gesturestate) {
+		case GestureNone:
+			break;
+		case GestureWheel:
+			touches[2].used = 1;
+		case GesturePinch:
+			touches[1].used = 1;
+		case GestureToggleKeyboard:
+			touches[0].used = 1;
+			break;
+		case GestureChord:
+			// used is the first touch in the view
+			for (i = 0; i < ntouches; i++)
+				if (touches[i].inview) {
+					touches[i].used = 1;
+					break;
+				}
+			// used are also all touches that are not in the view
+			for (i = 0; i < ntouches; i++)
+				if (!touches[i].inview)
+					touches[i].used = 1;
+			break;
+	}
+	// leave critical section
+	endtouches();
+}
+
 void
 screen_touch_began(void* touchid, float x, float y)
 {
 	touch *t;
 	
+	starttouches();
+	
 	touches[ntouches].tid = touchid;
 	touches[ntouches].x = x;
 	touches[ntouches].y = y;
+	touches[ntouches].used = 0;
 	t = &(touches[ntouches]);
 	ntouches++;
 	
-	if(!isready)
+	if(!isready) {
+		endtouches();
 		return;
+	}
 	
 	switch (gesturestate) {
 		case GestureNone:
@@ -256,16 +330,19 @@ screen_touch_began(void* touchid, float x, float y)
 			}
 			screen_invalidate();
 			break;
-	}	
+	}
+	
+	end();
 }
-
-#define Wheelstep 5
 
 void
 screen_touch_moved(void *touchid, float x, float y)
 {
 	int i;
 	touch *t = nil;
+	
+	starttouches();
+	
 	for (i = 0; i < ntouches; i++)
 		if (touches[i].tid == touchid) {
 			t = &(touches[i]);
@@ -273,13 +350,16 @@ screen_touch_moved(void *touchid, float x, float y)
 		}
 	if (!t) {
 		printf("Warning...moved a touch that never started\n");
+		endtouches();
 		return;
 	}
 	t->x = x;
 	t->y = y;
 
-	if (!isready)
+	if (!isready) {
+		endtouches();
 		return;
+	}
 
 	switch (gesturestate) {
 		case GestureWheel: {
@@ -329,6 +409,8 @@ screen_touch_moved(void *touchid, float x, float y)
 			
 		}
 	}
+	
+	end();
 }
 
 void
@@ -336,6 +418,8 @@ screen_touch_ended(void *touchid, float x, float y)
 {
 	int i;
 	touch *t = nil;
+	
+	starttouches();
 	
 	for (i = 0; i < ntouches; i++)
 		if (touches[i].tid == touchid) {
@@ -345,15 +429,17 @@ screen_touch_ended(void *touchid, float x, float y)
 		}
 	if (!t) {
 		printf("Warning...ended a touch that never started\n");
+		endtouches();
 		return;
 	}
 	
-	if (!isready)
+	if (!isready) {
+		endtouches();
 		return;
+	}
 
 	switch (gesturestate) {
 		case GestureWheel:
-			printf("WHEEL end!\n");
 			if (ntouches < 3)
 				gesturestate = GestureNone;
 			break;
@@ -386,6 +472,8 @@ screen_touch_ended(void *touchid, float x, float y)
 	}
 	//if (ntouches == 0)
 	//	printf("NO TOUCHES\n");
+	
+	end();
 }
 
 void
