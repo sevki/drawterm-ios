@@ -10,6 +10,7 @@
 
 typedef struct Accelinfo Accelinfo;
 typedef struct Locationinfo Locationinfo;
+typedef struct Headinginfo Headinginfo;
 
 struct Accelinfo
 {
@@ -28,19 +29,30 @@ struct Locationinfo
 	float x, y, altitude, haccur, vaccur;	
 };
 
-Accelinfo accel;
-Locationinfo location;
+struct Headinginfo
+{
+	Lock lk;
+	Rendez r;
+	int open, changed, logging, failed;
+	float mag, tru, accuracy;
+};
+
+static Accelinfo accel;
+static Locationinfo location;
+static Headinginfo heading;
 
 enum{
 	Qdir,
 	Qaccel,
 	Qlocation,
+	Qheading,
 };
 
 Dirtab iosdir[]={
 	".",		{Qdir, 0, QTDIR},	0,	DMDIR|0555,	
 	"accel",	{Qaccel},	0,			0444,
 	"location",	{Qlocation},0,			0444,
+	"heading",  {Qheading}, 0,			0444,
 	
 };
 
@@ -49,9 +61,11 @@ Dirtab iosdir[]={
 
 
 void loglocation(); // startup.m
+void logheading(); // startup.m
 
 static int accelchanged(void *a);
 static int locationchanged(void *a);
+static int headingchanged(void *a);
 
 static Chan*
 iosattach(char *spec)
@@ -89,6 +103,23 @@ iosopen(Chan *c, int omode)
 			}
 			accel.open = 1;
 			unlock(&accel.lk);
+			break;
+	case Qheading:
+			if (omode != OREAD)
+				error(Eperm);
+			lock(&heading.lk);
+			if (heading.open) {
+				unlock(&heading.lk);
+				error(Einuse);
+			}
+			if (!heading.logging) {
+				logheading();
+				heading.logging = 1;
+			} else {
+				heading.changed = 1;
+			}
+			heading.open = 1;
+			unlock(&heading.lk);
 			break;
 	case Qlocation:
 			if (omode != OREAD)
@@ -134,6 +165,11 @@ iosclose(Chan *c)
 			location.open = 0;
 			unlock(&location.lk);
 			break;
+		case Qheading:
+			lock(&heading.lk);
+			heading.open = 0;
+			unlock(&heading.lk);
+			break;
 	}
 }
 
@@ -162,6 +198,22 @@ iosread(Chan *c, void *va, long n, vlong offset)
 			memmove(va, buf, n);
 			return n;
 		break;
+		case Qheading:
+			while (!headingchanged(0))
+				sleep(&heading.r, headingchanged, 0);
+			lock(&heading.lk);
+			if (heading.failed) {
+				error("cannot read from heading service");
+				unlock(&heading.lk);
+				return -1;
+			}
+			len = sprint(buf, "%11f %11f %11f\n", heading.mag, heading.tru, heading.accuracy);
+			heading.changed = 0;
+			unlock(&heading.lk);
+			if (n > len)
+				n = len;
+			memmove(va, buf, n);
+			return n;
 		case Qlocation:
 			while(!locationchanged(0))
 				sleep(&location.r, locationchanged, 0);
@@ -198,7 +250,10 @@ ioswrite(Chan *c, void *va, long n, vlong offset)
 		break;
 	case Qlocation:
 		panic("shouldn't be able to write on Qlocation");
-		break;			
+		break;
+	case Qheading:
+		panic("shouldn't be able to write on Qheading");	
+		break;
 	}
 
 	error(Egreg);
@@ -219,6 +274,13 @@ locationchanged(void *a)
 {
 	USED(a);
 	return location.changed;
+}
+
+static int
+headingchanged(void *a)
+{
+	USED(a);
+	return heading.changed;
 }
 
 void
@@ -246,6 +308,19 @@ sendlocation(float x, float y, float altitude, float haccuracy, float vaccuracy,
 	location.changed = 1;
 	unlock(&location.lk);
 	wakeup(&location.r);
+}
+
+void
+sendheading(float magheading, float trueheading, float accuracy, int failed)
+{
+	lock(&heading.lk);
+	heading.mag = magheading;
+	heading.tru = trueheading;
+	heading.accuracy = accuracy;
+	heading.failed = failed;
+	heading.changed = 1;
+	unlock(&heading.lk);
+	wakeup(&heading.r);
 }
 
 

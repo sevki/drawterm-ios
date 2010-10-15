@@ -1,0 +1,2 @@
+#!/bin/rc
+sed 1q /dev/location | awk '{printf("%s %s me\n", $2, $1);}' | map mercator -t - | plot
