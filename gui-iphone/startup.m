@@ -1060,14 +1060,14 @@ startcam()
 	UINavigationController *navcont = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 	[window addSubview:[navcont view]];
 
-
+/*
 	bitpicker = [[UIImagePickerController alloc] init];
 	bitpicker.delegate = self;
     bitpicker.sourceType = UIImagePickerControllerSourceTypeCamera; //UIImagePickerControllerSourceTypePhotoLibrary;
     //bitpicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 
 	//[window presentModalViewController:bitpicker animated:YES];
-
+*/
     [window makeKeyAndVisible];
 }
 
