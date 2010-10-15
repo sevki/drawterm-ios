@@ -21,7 +21,7 @@ void screen_touch_began(void* touchid, float x, float y);
 
 void sendaccel(float x, float y, float z);
 void sendlocation(float x, float y, float altitude, float haccuracy, float vaccuracy, int failed); // Coordinates in WGS84
-
+void sendheading(float magheading, float trueheading, float accuracy, int failed);
 
 extern const char *userpass;
 
@@ -916,13 +916,19 @@ loglocation()
 	[locMgr startUpdatingLocation];
 }
 
+void
+logheading()
+{
+	[locMgr startUpdatingHeading];
+	// XXX: some devices don't have a compass. we should fail here right away
+}
 
 @interface App : UIApplication <UIAccelerometerDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate> {
 }
 @end
 
 @implementation App
-
+// startUpdatingHeading
 
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)loc
@@ -931,10 +937,19 @@ loglocation()
 	sendlocation(loc.coordinate.longitude, loc.coordinate.latitude, loc.altitude, loc.horizontalAccuracy, loc.verticalAccuracy, 0);
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+{
+	sendheading(	newHeading.magneticHeading,
+					newHeading.trueHeading,
+					newHeading.headingAccuracy,
+					0); // did not fail
+}
+
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
 	sendlocation(0,0,0,0,0, 1);
+	NSLog(@"fail!\n");
 }
 
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
@@ -981,11 +996,13 @@ loglocation()
 #else
 	UIAccelerometer *a = [UIAccelerometer sharedAccelerometer];
 	a.updateInterval = 1.0 / 100.0;
-	a.delegate = self;	
+	a.delegate = self;
 #endif
 	
 	locMgr = [[CLLocationManager alloc] init];
 	locMgr.delegate = self;
+
+
 	
 	CGRect r = [[UIScreen mainScreen] bounds];
 	//r.origin.y = 25;
@@ -994,23 +1011,17 @@ loglocation()
 	uiview = [[TermView alloc] initWithFrame:r];
 	[window addSubview: uiview];
 
-#if 0
-	r.origin.x = 40;
-	r.origin.y = 40;
-	r.size.width = 200;
-	r.size.height = 40;
-#endif
 	UITextField *uitext = [[UITextField alloc] initWithFrame:r];
 	[window addSubview:uitext];
-	
+
 	TermViewController *tvc = [[TermViewController alloc] init];
 	tvc.view = uitext;
-	
+
 	ConViewController *rootViewController = [[ConViewController alloc] initWithStyle:UITableViewStylePlain];
 	UINavigationController *navcont = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 	[window addSubview:[navcont view]];
 
-	
+
 	//bitpicker = [[UIImagePickerController alloc] init];
 	//bitpicker.delegate = self;
 //    bitpicker.sourceType = UIImagePickerControllerSourceTypeCamera; //UIImagePickerControllerSourceTypePhotoLibrary;
@@ -1020,10 +1031,7 @@ loglocation()
 	//[window presentModalViewController:bitpicker animated:YES];
 
     [window makeKeyAndVisible];
-
-
 }
-
 
 @end
 

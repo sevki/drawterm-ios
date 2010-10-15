@@ -63,6 +63,9 @@ static float pinchdist;
 static float pinchzoom;
 static int magnify;
 
+static float lastwheel;
+
+
 pt cursoroff;
 
 static uchar cursorbit[16*16*4];
@@ -97,6 +100,7 @@ enum {
 	GesturePinch,
 	GestureToggleKeyboard,
 	GestureChord,
+	GestureWheel,
 };
 
 static float origx, origy;
@@ -204,6 +208,12 @@ screen_touch_began(void* touchid, float x, float y)
 				//printf("sending chord 1\n");
 				sendbuttons(mmod, lastmx, lastmy);
 				screen_invalidate();
+			} else if (ntouches == 3) {
+				gesturestate = GestureWheel;
+				// origy is used for wheeldelta
+				//origy = ((touches[0].y + touches[1].y + touches[2].y) * (1.0/3.0) - offy) / zoom;
+				lastwheel = (touches[0].y + touches[1].y + touches[2].y) * (1.0/3.0);
+				//printf("WHEEL activated\n");
 			} else if (ntouches == 2) {
 				gesturestate = GesturePinch;
 				// orig in SCREEN coordinates --> point under the pinch
@@ -227,9 +237,17 @@ screen_touch_began(void* touchid, float x, float y)
 
 			}
 			break;
+		case GesturePinch:
+			if (ntouches == 3) {
+				lastwheel = (touches[0].y + touches[1].y + touches[2].y) * (1.0/3.0);
+				//printf("WHEEL activated\n");
+				gesturestate = GestureWheel;
+			}
+			break;
 		case GestureChord:
 			checkmouse();
-			if (t->inview) {
+			if(ntouches == 3) {
+			} else if (t->inview) {
 				//NSLog(@"send buttons!\n");
 				lastmx = (t->x - offx) / zoom;
 				lastmy = (t->y - offy) / zoom;
@@ -240,6 +258,8 @@ screen_touch_began(void* touchid, float x, float y)
 			break;
 	}	
 }
+
+#define Wheelstep 5
 
 void
 screen_touch_moved(void *touchid, float x, float y)
@@ -260,10 +280,27 @@ screen_touch_moved(void *touchid, float x, float y)
 
 	if (!isready)
 		return;
-	
-	//printf("t:%i  %f//%f\n", i, t->x - origx, t->y - origy);
 
 	switch (gesturestate) {
+		case GestureWheel: {
+			float wheel = (touches[0].y + touches[1].y + touches[2].y) * (1.0/3.0);
+
+			while (lastwheel - wheel > Wheelstep) {
+				sendbuttons(16,
+							(touches[0].x + touches[1].x + touches[2].x) * (1.0/3.0),
+							(touches[0].y + touches[1].y + touches[2].y) * (1.0/3.0)
+							);
+				lastwheel = lastwheel - Wheelstep;
+			} 
+			while (wheel - lastwheel > Wheelstep) {
+				sendbuttons(8,
+							(touches[0].x + touches[1].x + touches[2].x) * (1.0/3.0),
+							(touches[0].y + touches[1].y + touches[2].y) * (1.0/3.0)
+							);
+				lastwheel = lastwheel + Wheelstep;
+			}
+			break;
+		}
 		case GestureNone:
 			lastmx = (t->x - offx) / zoom;
 			lastmy = (t->y - offy) / zoom;
@@ -315,6 +352,11 @@ screen_touch_ended(void *touchid, float x, float y)
 		return;
 
 	switch (gesturestate) {
+		case GestureWheel:
+			printf("WHEEL end!\n");
+			if (ntouches < 3)
+				gesturestate = GestureNone;
+			break;
 		case GestureNone:
 			magnify = 0;
 			screen_invalidate();

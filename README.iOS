@@ -1,5 +1,3 @@
-
-This is all pretty experimental.
 The code is ugly. I am aware of that. I am working on it :)
 
 Compile
@@ -8,6 +6,27 @@ Compile
 iphone/iphone.xcodeproj 
 
 (for iPad you need to change the SDK target to something that runs on yours)
+
+Gestures
+--------
+
+1 finger combined with mousebuttons -> mouse
+2 fingers to pinch/zoom
+3 finger swipe for scrolling
+
+Devices
+-------
+
+Compass:
+        1) magnetic northpole (in degrees to N, clockwise)
+        2) true northpole     see above
+        3) accuracy in degrees
+% cat /dev/heading
+
+Location and Accelerometer:
+in the iphone/demos directory are some things to try:
+        - locdemo       retrieves location data and displays on map
+        - acceldemo.c   reads accelerometer data and moves a circle
 
 Relevant files
 --------------
@@ -26,16 +45,10 @@ Known issues
 ------------
 
 - when you rotate the phone, the keyboard suddendly appears on the wrong side
-- drawing updates don't fire all the time
-- code is ugly and needs to be refactored, once the issues and features are all
-  sorted out (and hopefully merge into the rsc tree)
 - The buttons could be prettier *laughs*
 
 Missing stuff from the Proposal
 -------------------------------
 
-- Devices: Camera, Compass, passing down Multitouch
-- A way to make navigating rio better. I am not sure about that. Zoom/Pan seems
-  to work pretty nice. Jeff, what is your opinion on that?
-
+- Devices: Camera, passing down Multitouch
 
