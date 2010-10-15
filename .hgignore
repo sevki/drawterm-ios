@@ -2,6 +2,8 @@
 (^|/)\.hg($|/)
 (^|/)\.hgtags($|/)
 (^|/)build($|)
+\.pbxuser$
+\.perspectivev3$
 ^drawterm.log$
 ^state$
 ^state.old$
