@@ -1572,7 +1572,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iphone" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "drawterm" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -2394,7 +2394,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DPTHREAD";
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.2;
+				SDKROOT = iphoneos3.2;
 			};
 			name = Release;
 		};
@@ -2509,7 +2509,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iphone" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "drawterm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
