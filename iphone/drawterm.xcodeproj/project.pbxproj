@@ -384,6 +384,12 @@
 		41EDB0DA12693835002499A6 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		41EDB15012697A56002499A6 /* README.iOS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.iOS; path = ../README.iOS; sourceTree = SOURCE_ROOT; };
 		41EDB16B12697D66002499A6 /* main.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = main.m; sourceTree = "<group>"; };
+		41EDB24E126A0E44002499A6 /* devaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = devaudio.h; path = ../kern/devaudio.h; sourceTree = SOURCE_ROOT; };
+		41EDB24F126A0E44002499A6 /* devip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = devip.h; path = ../kern/devip.h; sourceTree = SOURCE_ROOT; };
+		41EDB250126A0E44002499A6 /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = error.h; path = ../kern/error.h; sourceTree = SOURCE_ROOT; };
+		41EDB251126A0E44002499A6 /* fns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fns.h; path = ../kern/fns.h; sourceTree = SOURCE_ROOT; };
+		41EDB252126A0E44002499A6 /* netif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = netif.h; path = ../kern/netif.h; sourceTree = SOURCE_ROOT; };
+		41EDB253126A0E44002499A6 /* screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = screen.h; path = ../kern/screen.h; sourceTree = SOURCE_ROOT; };
 		658033080F7D2213008AAFD3 /* 9ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball.png; path = ../9ball.png; sourceTree = SOURCE_ROOT; };
 		658033290F7D23A4008AAFD3 /* dat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dat.h; path = ../kern/dat.h; sourceTree = SOURCE_ROOT; };
 		6580332B0F7D23DA008AAFD3 /* 9windows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = 9windows.h; path = ../include/9windows.h; sourceTree = SOURCE_ROOT; };
@@ -919,6 +925,12 @@
 		6580336B0F7D2560008AAFD3 /* kern */ = {
 			isa = PBXGroup;
 			children = (
+				41EDB24E126A0E44002499A6 /* devaudio.h */,
+				41EDB24F126A0E44002499A6 /* devip.h */,
+				41EDB250126A0E44002499A6 /* error.h */,
+				41EDB251126A0E44002499A6 /* fns.h */,
+				41EDB252126A0E44002499A6 /* netif.h */,
+				41EDB253126A0E44002499A6 /* screen.h */,
 				658033790F7D26EF008AAFD3 /* allocb.c */,
 				6580337A0F7D26EF008AAFD3 /* cache.c */,
 				6580337B0F7D26EF008AAFD3 /* chan.c */,
@@ -2376,7 +2388,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-DPTHREAD";
 				PREBINDING = NO;
 				SDKROOT = iphonesimulator3.2;
 			};
@@ -2390,7 +2401,6 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				OTHER_CFLAGS = "-DPTHREAD";
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.2;
 			};
