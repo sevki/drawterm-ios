@@ -80,13 +80,9 @@ int dt_main(int argc, char *argv[]);
 @implementation TermViewController
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	NSLog(@"rot rot...\n");
-	return NO;
+	return YES;
 }
 @end
-
-/*
-*/
 
 @implementation TermView
 
@@ -726,8 +722,9 @@ titleForHeaderInSection:(NSInteger)section
 	[[self tableView] reloadData];
 }
 
-- (void)viewDidLoad {
-	self.title = @"Servers"; //NSLocalizedString(@"Time Zones", @"Time Zones title");
+- (void)viewDidLoad
+{
+	[self setTitle:[NSString stringWithFormat:@"Drawterm (%s)\tServers", DRAWTERM_VERSION]];
 	[[self tableView] setRowHeight: 54.0]; // XXX check
 	[[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
 	UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
