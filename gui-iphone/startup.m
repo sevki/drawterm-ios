@@ -22,8 +22,6 @@ void screen_touch_began(void* touchid, float x, float y);
 void sendaccel(float x, float y, float z);
 void sendlocation(float x, float y, float altitude, float haccuracy, float vaccuracy, int failed); // Coordinates in WGS84
 void sendheading(float magheading, float trueheading, float accuracy, int failed);
-void sendcam(void *dat, int len, char *failed);
-
 
 extern const char *userpass;
 
@@ -82,25 +80,14 @@ int dt_main(int argc, char *argv[]);
 @implementation TermViewController
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	NSLog(@"rot rot...\n");
 	return NO;
 }
 @end
 
-/*
-*/
-
 @implementation TermView
-
-/*
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
- */
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	NSLog(@"rot rot...\n");
 	return NO;
 }
 
@@ -470,13 +457,11 @@ static void *dt_thread(void *a)
 	nargv[6] = strdup([self.con.user UTF8String]);
 	userpass = strdup([self.con.pass UTF8String]);
 
-	[[UIApplication sharedApplication] setStatusBarHidden:YES];
-	[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeRight animated:YES];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
+//	[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeRight animated:YES];
 	[self.view removeFromSuperview];
 	[self.navigationController setNavigationBarHidden: YES];
 	//[uiview becomeFirstResponder];
-
-
 
 	pthread_create(&t, NULL, dt_thread, NULL);
 }
@@ -662,6 +647,11 @@ titleForHeaderInSection:(NSInteger)section
 
 @synthesize displayedObjects = _displayedObjects;
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return YES;
+}
+
 - (void) dealloc
 {
 	[_displayedObjects release];
@@ -728,8 +718,9 @@ titleForHeaderInSection:(NSInteger)section
 	[[self tableView] reloadData];
 }
 
-- (void)viewDidLoad {
-	self.title = @"Servers"; //NSLocalizedString(@"Time Zones", @"Time Zones title");
+- (void)viewDidLoad
+{
+	[self setTitle:[NSString stringWithFormat:@"Drawterm (%s)\tServers", DRAWTERM_VERSION]];
 	[[self tableView] setRowHeight: 54.0]; // XXX check
 	[[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
 	UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
@@ -797,7 +788,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 - (BOOL)tableView:(UITableView *)tableView
-canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+	canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
 }
@@ -1029,8 +1020,8 @@ startcam()
 	sendcam(nil, 0, "cancel picking");
 }
 
-
-- (void)applicationDidFinishLaunching:(UIApplication *)application {  
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{  
     window = [[TermWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
 #if TARGET_IPHONE_SIMULATOR
@@ -1045,7 +1036,6 @@ startcam()
 	locMgr.delegate = self;
 
 
-	
 	CGRect r = [[UIScreen mainScreen] bounds];
 	uiview = [[TermView alloc] initWithFrame:r];
 	[window addSubview: uiview];
@@ -1072,11 +1062,3 @@ startcam()
 }
 
 @end
-
-int
-main(int argc, char **argv)
-{
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	UIApplicationMain(argc, argv, @"App", nil);
-    [pool release];	
-}
