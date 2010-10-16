@@ -80,21 +80,14 @@ int dt_main(int argc, char *argv[]);
 @implementation TermViewController
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return YES;
+	return NO;
 }
 @end
 
 @implementation TermView
 
-/*
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
- */
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	NSLog(@"rot rot...\n");
 	return NO;
 }
 
@@ -464,13 +457,11 @@ static void *dt_thread(void *a)
 	nargv[6] = strdup([self.con.user UTF8String]);
 	userpass = strdup([self.con.pass UTF8String]);
 
-	[[UIApplication sharedApplication] setStatusBarHidden:YES];
-	[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeRight animated:YES];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
+//	[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeRight animated:YES];
 	[self.view removeFromSuperview];
 	[self.navigationController setNavigationBarHidden: YES];
 	//[uiview becomeFirstResponder];
-
-
 
 	pthread_create(&t, NULL, dt_thread, NULL);
 }
@@ -656,6 +647,11 @@ titleForHeaderInSection:(NSInteger)section
 
 @synthesize displayedObjects = _displayedObjects;
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return YES;
+}
+
 - (void) dealloc
 {
 	[_displayedObjects release];
@@ -792,7 +788,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 - (BOOL)tableView:(UITableView *)tableView
-canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+	canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
 }
@@ -985,7 +981,8 @@ logheading()
 	[picker.view removeFromSuperview];
 }
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {  
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{  
     window = [[TermWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
 #if TARGET_IPHONE_SIMULATOR
@@ -1000,11 +997,7 @@ logheading()
 	locMgr.delegate = self;
 
 
-	
 	CGRect r = [[UIScreen mainScreen] bounds];
-	//r.origin.y = 25;
-	//r.size.height -= 25;
-	//r.size.height = 200;
 	uiview = [[TermView alloc] initWithFrame:r];
 	[window addSubview: uiview];
 
@@ -1031,11 +1024,3 @@ logheading()
 }
 
 @end
-
-int
-main(int argc, char **argv)
-{
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	UIApplicationMain(argc, argv, @"App", nil);
-    [pool release];	
-}
