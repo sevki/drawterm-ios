@@ -14,6 +14,7 @@
 		41EDB0DB12693835002499A6 /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 41EDB0D812693835002499A6 /* debug.xcconfig */; };
 		41EDB0DC12693835002499A6 /* drawtermVersion in Resources */ = {isa = PBXBuildFile; fileRef = 41EDB0D912693835002499A6 /* drawtermVersion */; };
 		41EDB0DD12693835002499A6 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 41EDB0DA12693835002499A6 /* release.xcconfig */; };
+		41EDB16C12697D66002499A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDB16B12697D66002499A6 /* main.m */; };
 		658033090F7D2213008AAFD3 /* 9ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 658033080F7D2213008AAFD3 /* 9ball.png */; };
 		658033F60F7D2A34008AAFD3 /* allocb.c in Sources */ = {isa = PBXBuildFile; fileRef = 658033790F7D26EF008AAFD3 /* allocb.c */; };
 		658033F70F7D2A34008AAFD3 /* cache.c in Sources */ = {isa = PBXBuildFile; fileRef = 6580337A0F7D26EF008AAFD3 /* cache.c */; };
@@ -277,20 +278,15 @@
 		658036C30F7D3592008AAFD3 /* liblibsec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 658034CE0F7D2F55008AAFD3 /* liblibsec.a */; };
 		658036C70F7D368D008AAFD3 /* getcallerpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 658036C60F7D368D008AAFD3 /* getcallerpc.c */; };
 		658036CA0F7D36AA008AAFD3 /* latin1.c in Sources */ = {isa = PBXBuildFile; fileRef = 658036C90F7D36AA008AAFD3 /* latin1.c */; };
-		658036EC0F7D376D008AAFD3 /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 658036E90F7D376D008AAFD3 /* alloc.c */; };
-		658036ED0F7D376D008AAFD3 /* cload.c in Sources */ = {isa = PBXBuildFile; fileRef = 658036EA0F7D376D008AAFD3 /* cload.c */; };
-		658036EE0F7D376D008AAFD3 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 658036EB0F7D376D008AAFD3 /* draw.c */; };
 		658036F00F7D3778008AAFD3 /* liblibgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 658036E50F7D3738008AAFD3 /* liblibgui.a */; };
 		658037170F7D3845008AAFD3 /* md5block.c in Sources */ = {isa = PBXBuildFile; fileRef = 658037150F7D3845008AAFD3 /* md5block.c */; };
 		658037180F7D3845008AAFD3 /* sha1block.c in Sources */ = {isa = PBXBuildFile; fileRef = 658037160F7D3845008AAFD3 /* sha1block.c */; };
-		6580374B0F7D3AB0008AAFD3 /* load.c in Sources */ = {isa = PBXBuildFile; fileRef = 6580374A0F7D3AB0008AAFD3 /* load.c */; };
 		65887BF90F7D4341002A397E /* cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 65887BF80F7D4341002A397E /* cpu.c */; };
 		65887BFD0F7D4363002A397E /* readcons.c in Sources */ = {isa = PBXBuildFile; fileRef = 65887BFB0F7D4363002A397E /* readcons.c */; };
 		65887BFE0F7D4363002A397E /* secstore.c in Sources */ = {isa = PBXBuildFile; fileRef = 65887BFC0F7D4363002A397E /* secstore.c */; };
 		65887C0E0F7D44AF002A397E /* exportfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 65887C0C0F7D44AF002A397E /* exportfs.c */; };
 		65887C0F0F7D44AF002A397E /* exportsrv.c in Sources */ = {isa = PBXBuildFile; fileRef = 65887C0D0F7D44AF002A397E /* exportsrv.c */; };
 		65887C1D0F7D4516002A397E /* liblibexportfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65887C090F7D4481002A397E /* liblibexportfs.a */; };
-		65887C310F7D46AD002A397E /* screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 65887C300F7D46AD002A397E /* screen.m */; };
 		65ACC6FB11BA4BAE000A2FC1 /* startup.m in Sources */ = {isa = PBXBuildFile; fileRef = 65ACC6FA11BA4BAE000A2FC1 /* startup.m */; };
 		65ACC8F411BA8272000A2FC1 /* screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 65ACC8F311BA8272000A2FC1 /* screen.m */; };
 		65ACC91E11BA8581000A2FC1 /* dtmain.c in Sources */ = {isa = PBXBuildFile; fileRef = 65ACC91D11BA8581000A2FC1 /* dtmain.c */; };
@@ -386,6 +382,8 @@
 		41EDB0D812693835002499A6 /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		41EDB0D912693835002499A6 /* drawtermVersion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drawtermVersion; sourceTree = "<group>"; };
 		41EDB0DA12693835002499A6 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		41EDB15012697A56002499A6 /* README.iOS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.iOS; path = ../README.iOS; sourceTree = SOURCE_ROOT; };
+		41EDB16B12697D66002499A6 /* main.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = main.m; sourceTree = "<group>"; };
 		658033080F7D2213008AAFD3 /* 9ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball.png; path = ../9ball.png; sourceTree = SOURCE_ROOT; };
 		658033290F7D23A4008AAFD3 /* dat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dat.h; path = ../kern/dat.h; sourceTree = SOURCE_ROOT; };
 		6580332B0F7D23DA008AAFD3 /* 9windows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = 9windows.h; path = ../include/9windows.h; sourceTree = SOURCE_ROOT; };
@@ -670,19 +668,14 @@
 		658036C60F7D368D008AAFD3 /* getcallerpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = getcallerpc.c; sourceTree = SOURCE_ROOT; };
 		658036C90F7D36AA008AAFD3 /* latin1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = latin1.c; path = ../latin1.c; sourceTree = SOURCE_ROOT; };
 		658036E50F7D3738008AAFD3 /* liblibgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		658036E90F7D376D008AAFD3 /* alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alloc.c; path = gui/alloc.c; sourceTree = SOURCE_ROOT; };
-		658036EA0F7D376D008AAFD3 /* cload.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cload.c; path = gui/cload.c; sourceTree = SOURCE_ROOT; };
-		658036EB0F7D376D008AAFD3 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = draw.c; path = gui/draw.c; sourceTree = SOURCE_ROOT; };
 		658037150F7D3845008AAFD3 /* md5block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = md5block.c; path = ../libsec/md5block.c; sourceTree = SOURCE_ROOT; };
 		658037160F7D3845008AAFD3 /* sha1block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sha1block.c; path = ../libsec/sha1block.c; sourceTree = SOURCE_ROOT; };
-		6580374A0F7D3AB0008AAFD3 /* load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = load.c; path = gui/load.c; sourceTree = SOURCE_ROOT; };
 		65887BF80F7D4341002A397E /* cpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpu.c; path = ../cpu.c; sourceTree = SOURCE_ROOT; };
 		65887BFB0F7D4363002A397E /* readcons.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = readcons.c; path = ../readcons.c; sourceTree = SOURCE_ROOT; };
 		65887BFC0F7D4363002A397E /* secstore.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = secstore.c; path = ../secstore.c; sourceTree = SOURCE_ROOT; };
 		65887C090F7D4481002A397E /* liblibexportfs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibexportfs.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		65887C0C0F7D44AF002A397E /* exportfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = exportfs.c; path = ../exportfs/exportfs.c; sourceTree = SOURCE_ROOT; };
 		65887C0D0F7D44AF002A397E /* exportsrv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = exportsrv.c; path = ../exportfs/exportsrv.c; sourceTree = SOURCE_ROOT; };
-		65887C300F7D46AD002A397E /* screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = screen.m; path = gui/screen.m; sourceTree = SOURCE_ROOT; };
 		65ACC6FA11BA4BAE000A2FC1 /* startup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = startup.m; path = "../gui-iphone/startup.m"; sourceTree = SOURCE_ROOT; };
 		65ACC8F311BA8272000A2FC1 /* screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = screen.m; path = "../gui-iphone/screen.m"; sourceTree = SOURCE_ROOT; };
 		65ACC91D11BA8581000A2FC1 /* dtmain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dtmain.c; path = "../gui-iphone/dtmain.c"; sourceTree = SOURCE_ROOT; };
@@ -815,12 +808,12 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				41EDB15012697A56002499A6 /* README.iOS */,
 				41EDB0D712693835002499A6 /* config */,
 				65D626C311C3ED4B000738CE /* dev-ios.c */,
 				65ACC6F911BA4B6C000A2FC1 /* gui-iphone */,
 				658033160F7D22FE008AAFD3 /* dt sources */,
 				658036C50F7D3673008AAFD3 /* attic */,
-				658036D80F7D36ED008AAFD3 /* old iphone gui */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				65E90FD311C6750B00DA60F2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -1248,18 +1241,6 @@
 			name = attic;
 			sourceTree = "<group>";
 		};
-		658036D80F7D36ED008AAFD3 /* old iphone gui */ = {
-			isa = PBXGroup;
-			children = (
-				65887C300F7D46AD002A397E /* screen.m */,
-				6580374A0F7D3AB0008AAFD3 /* load.c */,
-				658036E90F7D376D008AAFD3 /* alloc.c */,
-				658036EA0F7D376D008AAFD3 /* cload.c */,
-				658036EB0F7D376D008AAFD3 /* draw.c */,
-			);
-			name = "old iphone gui";
-			sourceTree = "<group>";
-		};
 		65887C040F7D446F002A397E /* libexportfs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1275,6 +1256,7 @@
 				65ACC91D11BA8581000A2FC1 /* dtmain.c */,
 				65ACC8F311BA8272000A2FC1 /* screen.m */,
 				65ACC6FA11BA4BAE000A2FC1 /* startup.m */,
+				41EDB16B12697D66002499A6 /* main.m */,
 			);
 			name = "gui-iphone";
 			sourceTree = "<group>";
@@ -1647,6 +1629,7 @@
 				65ACC6FB11BA4BAE000A2FC1 /* startup.m in Sources */,
 				65ACC8F411BA8272000A2FC1 /* screen.m in Sources */,
 				65ACC91E11BA8581000A2FC1 /* dtmain.c in Sources */,
+				41EDB16C12697D66002499A6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1970,11 +1953,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				658036EC0F7D376D008AAFD3 /* alloc.c in Sources */,
-				658036ED0F7D376D008AAFD3 /* cload.c in Sources */,
-				658036EE0F7D376D008AAFD3 /* draw.c in Sources */,
-				6580374B0F7D3AB0008AAFD3 /* load.c in Sources */,
-				65887C310F7D46AD002A397E /* screen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
