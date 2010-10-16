@@ -15,6 +15,10 @@
 		41EDB0DC12693835002499A6 /* drawtermVersion in Resources */ = {isa = PBXBuildFile; fileRef = 41EDB0D912693835002499A6 /* drawtermVersion */; };
 		41EDB0DD12693835002499A6 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 41EDB0DA12693835002499A6 /* release.xcconfig */; };
 		41EDB16C12697D66002499A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EDB16B12697D66002499A6 /* main.m */; };
+		41EDB2A5126A386E002499A6 /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 41EDB2A1126A386E002499A6 /* alloc.c */; };
+		41EDB2A6126A386E002499A6 /* cload.c in Sources */ = {isa = PBXBuildFile; fileRef = 41EDB2A2126A386E002499A6 /* cload.c */; };
+		41EDB2A7126A386E002499A6 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 41EDB2A3126A386E002499A6 /* draw.c */; };
+		41EDB2A8126A386E002499A6 /* load.c in Sources */ = {isa = PBXBuildFile; fileRef = 41EDB2A4126A386E002499A6 /* load.c */; };
 		658033090F7D2213008AAFD3 /* 9ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 658033080F7D2213008AAFD3 /* 9ball.png */; };
 		658033F60F7D2A34008AAFD3 /* allocb.c in Sources */ = {isa = PBXBuildFile; fileRef = 658033790F7D26EF008AAFD3 /* allocb.c */; };
 		658033F70F7D2A34008AAFD3 /* cache.c in Sources */ = {isa = PBXBuildFile; fileRef = 6580337A0F7D26EF008AAFD3 /* cache.c */; };
@@ -390,6 +394,10 @@
 		41EDB251126A0E44002499A6 /* fns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fns.h; path = ../kern/fns.h; sourceTree = SOURCE_ROOT; };
 		41EDB252126A0E44002499A6 /* netif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = netif.h; path = ../kern/netif.h; sourceTree = SOURCE_ROOT; };
 		41EDB253126A0E44002499A6 /* screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = screen.h; path = ../kern/screen.h; sourceTree = SOURCE_ROOT; };
+		41EDB2A1126A386E002499A6 /* alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alloc.c; path = "../gui-iphone/alloc.c"; sourceTree = SOURCE_ROOT; };
+		41EDB2A2126A386E002499A6 /* cload.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cload.c; path = "../gui-iphone/cload.c"; sourceTree = SOURCE_ROOT; };
+		41EDB2A3126A386E002499A6 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = draw.c; path = "../gui-iphone/draw.c"; sourceTree = SOURCE_ROOT; };
+		41EDB2A4126A386E002499A6 /* load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = load.c; path = "../gui-iphone/load.c"; sourceTree = SOURCE_ROOT; };
 		658033080F7D2213008AAFD3 /* 9ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball.png; path = ../9ball.png; sourceTree = SOURCE_ROOT; };
 		658033290F7D23A4008AAFD3 /* dat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dat.h; path = ../kern/dat.h; sourceTree = SOURCE_ROOT; };
 		6580332B0F7D23DA008AAFD3 /* 9windows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = 9windows.h; path = ../include/9windows.h; sourceTree = SOURCE_ROOT; };
@@ -894,6 +902,12 @@
 			isa = PBXGroup;
 			children = (
 				658033290F7D23A4008AAFD3 /* dat.h */,
+				41EDB24E126A0E44002499A6 /* devaudio.h */,
+				41EDB24F126A0E44002499A6 /* devip.h */,
+				41EDB250126A0E44002499A6 /* error.h */,
+				41EDB251126A0E44002499A6 /* fns.h */,
+				41EDB252126A0E44002499A6 /* netif.h */,
+				41EDB253126A0E44002499A6 /* screen.h */,
 			);
 			name = kern;
 			sourceTree = "<group>";
@@ -925,12 +939,6 @@
 		6580336B0F7D2560008AAFD3 /* kern */ = {
 			isa = PBXGroup;
 			children = (
-				41EDB24E126A0E44002499A6 /* devaudio.h */,
-				41EDB24F126A0E44002499A6 /* devip.h */,
-				41EDB250126A0E44002499A6 /* error.h */,
-				41EDB251126A0E44002499A6 /* fns.h */,
-				41EDB252126A0E44002499A6 /* netif.h */,
-				41EDB253126A0E44002499A6 /* screen.h */,
 				658033790F7D26EF008AAFD3 /* allocb.c */,
 				6580337A0F7D26EF008AAFD3 /* cache.c */,
 				6580337B0F7D26EF008AAFD3 /* chan.c */,
@@ -1265,6 +1273,10 @@
 		65ACC6F911BA4B6C000A2FC1 /* gui-iphone */ = {
 			isa = PBXGroup;
 			children = (
+				41EDB2A1126A386E002499A6 /* alloc.c */,
+				41EDB2A2126A386E002499A6 /* cload.c */,
+				41EDB2A3126A386E002499A6 /* draw.c */,
+				41EDB2A4126A386E002499A6 /* load.c */,
 				65ACC91D11BA8581000A2FC1 /* dtmain.c */,
 				65ACC8F311BA8272000A2FC1 /* screen.m */,
 				65ACC6FA11BA4BAE000A2FC1 /* startup.m */,
@@ -1965,6 +1977,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41EDB2A5126A386E002499A6 /* alloc.c in Sources */,
+				41EDB2A6126A386E002499A6 /* cload.c in Sources */,
+				41EDB2A7126A386E002499A6 /* draw.c in Sources */,
+				41EDB2A8126A386E002499A6 /* load.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2381,6 +2397,7 @@
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41EDB0D812693835002499A6 /* debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2389,12 +2406,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.2;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41EDB0DA12693835002499A6 /* release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
