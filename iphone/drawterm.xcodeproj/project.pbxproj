@@ -19,6 +19,7 @@
 		41EDB2A6126A386E002499A6 /* cload.c in Sources */ = {isa = PBXBuildFile; fileRef = 41EDB2A2126A386E002499A6 /* cload.c */; };
 		41EDB2A7126A386E002499A6 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 41EDB2A3126A386E002499A6 /* draw.c */; };
 		41EDB2A8126A386E002499A6 /* load.c in Sources */ = {isa = PBXBuildFile; fileRef = 41EDB2A4126A386E002499A6 /* load.c */; };
+		41EDB335126A40A4002499A6 /* screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 65ACC8F311BA8272000A2FC1 /* screen.m */; };
 		658033090F7D2213008AAFD3 /* 9ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 658033080F7D2213008AAFD3 /* 9ball.png */; };
 		658033F60F7D2A34008AAFD3 /* allocb.c in Sources */ = {isa = PBXBuildFile; fileRef = 658033790F7D26EF008AAFD3 /* allocb.c */; };
 		658033F70F7D2A34008AAFD3 /* cache.c in Sources */ = {isa = PBXBuildFile; fileRef = 6580337A0F7D26EF008AAFD3 /* cache.c */; };
@@ -292,7 +293,6 @@
 		65887C0F0F7D44AF002A397E /* exportsrv.c in Sources */ = {isa = PBXBuildFile; fileRef = 65887C0D0F7D44AF002A397E /* exportsrv.c */; };
 		65887C1D0F7D4516002A397E /* liblibexportfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65887C090F7D4481002A397E /* liblibexportfs.a */; };
 		65ACC6FB11BA4BAE000A2FC1 /* startup.m in Sources */ = {isa = PBXBuildFile; fileRef = 65ACC6FA11BA4BAE000A2FC1 /* startup.m */; };
-		65ACC8F411BA8272000A2FC1 /* screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 65ACC8F311BA8272000A2FC1 /* screen.m */; };
 		65ACC91E11BA8581000A2FC1 /* dtmain.c in Sources */ = {isa = PBXBuildFile; fileRef = 65ACC91D11BA8581000A2FC1 /* dtmain.c */; };
 		65D626C411C3ED4B000738CE /* dev-ios.c in Sources */ = {isa = PBXBuildFile; fileRef = 65D626C311C3ED4B000738CE /* dev-ios.c */; };
 /* End PBXBuildFile section */
@@ -394,10 +394,10 @@
 		41EDB251126A0E44002499A6 /* fns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fns.h; path = ../kern/fns.h; sourceTree = SOURCE_ROOT; };
 		41EDB252126A0E44002499A6 /* netif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = netif.h; path = ../kern/netif.h; sourceTree = SOURCE_ROOT; };
 		41EDB253126A0E44002499A6 /* screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = screen.h; path = ../kern/screen.h; sourceTree = SOURCE_ROOT; };
-		41EDB2A1126A386E002499A6 /* alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alloc.c; path = "../gui-iphone/alloc.c"; sourceTree = SOURCE_ROOT; };
-		41EDB2A2126A386E002499A6 /* cload.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cload.c; path = "../gui-iphone/cload.c"; sourceTree = SOURCE_ROOT; };
-		41EDB2A3126A386E002499A6 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = draw.c; path = "../gui-iphone/draw.c"; sourceTree = SOURCE_ROOT; };
-		41EDB2A4126A386E002499A6 /* load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = load.c; path = "../gui-iphone/load.c"; sourceTree = SOURCE_ROOT; };
+		41EDB2A1126A386E002499A6 /* alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = alloc.c; sourceTree = "<group>"; };
+		41EDB2A2126A386E002499A6 /* cload.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cload.c; sourceTree = "<group>"; };
+		41EDB2A3126A386E002499A6 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = draw.c; sourceTree = "<group>"; };
+		41EDB2A4126A386E002499A6 /* load.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = load.c; sourceTree = "<group>"; };
 		658033080F7D2213008AAFD3 /* 9ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball.png; path = ../9ball.png; sourceTree = SOURCE_ROOT; };
 		658033290F7D23A4008AAFD3 /* dat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dat.h; path = ../kern/dat.h; sourceTree = SOURCE_ROOT; };
 		6580332B0F7D23DA008AAFD3 /* 9windows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = 9windows.h; path = ../include/9windows.h; sourceTree = SOURCE_ROOT; };
@@ -690,9 +690,9 @@
 		65887C090F7D4481002A397E /* liblibexportfs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibexportfs.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		65887C0C0F7D44AF002A397E /* exportfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = exportfs.c; path = ../exportfs/exportfs.c; sourceTree = SOURCE_ROOT; };
 		65887C0D0F7D44AF002A397E /* exportsrv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = exportsrv.c; path = ../exportfs/exportsrv.c; sourceTree = SOURCE_ROOT; };
-		65ACC6FA11BA4BAE000A2FC1 /* startup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = startup.m; path = "../gui-iphone/startup.m"; sourceTree = SOURCE_ROOT; };
-		65ACC8F311BA8272000A2FC1 /* screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = screen.m; path = "../gui-iphone/screen.m"; sourceTree = SOURCE_ROOT; };
-		65ACC91D11BA8581000A2FC1 /* dtmain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dtmain.c; path = "../gui-iphone/dtmain.c"; sourceTree = SOURCE_ROOT; };
+		65ACC6FA11BA4BAE000A2FC1 /* startup.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = startup.m; sourceTree = "<group>"; };
+		65ACC8F311BA8272000A2FC1 /* screen.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = screen.m; sourceTree = "<group>"; };
+		65ACC91D11BA8581000A2FC1 /* dtmain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dtmain.c; sourceTree = "<group>"; };
 		65D626C311C3ED4B000738CE /* dev-ios.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "dev-ios.c"; path = "../kern/dev-ios.c"; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -825,7 +825,7 @@
 				41EDB15012697A56002499A6 /* README.iOS */,
 				41EDB0D712693835002499A6 /* config */,
 				65D626C311C3ED4B000738CE /* dev-ios.c */,
-				65ACC6F911BA4B6C000A2FC1 /* gui-iphone */,
+				65ACC6F911BA4B6C000A2FC1 /* gui-ios */,
 				658033160F7D22FE008AAFD3 /* dt sources */,
 				658036C50F7D3673008AAFD3 /* attic */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -1270,7 +1270,7 @@
 			name = libexportfs;
 			sourceTree = "<group>";
 		};
-		65ACC6F911BA4B6C000A2FC1 /* gui-iphone */ = {
+		65ACC6F911BA4B6C000A2FC1 /* gui-ios */ = {
 			isa = PBXGroup;
 			children = (
 				41EDB2A1126A386E002499A6 /* alloc.c */,
@@ -1282,7 +1282,8 @@
 				65ACC6FA11BA4BAE000A2FC1 /* startup.m */,
 				41EDB16B12697D66002499A6 /* main.m */,
 			);
-			name = "gui-iphone";
+			name = "gui-ios";
+			path = "../gui-ios";
 			sourceTree = "<group>";
 		};
 		65E90FD311C6750B00DA60F2 /* Resources-iPad */ = {
@@ -1651,7 +1652,6 @@
 				65887BFD0F7D4363002A397E /* readcons.c in Sources */,
 				65887BFE0F7D4363002A397E /* secstore.c in Sources */,
 				65ACC6FB11BA4BAE000A2FC1 /* startup.m in Sources */,
-				65ACC8F411BA8272000A2FC1 /* screen.m in Sources */,
 				65ACC91E11BA8581000A2FC1 /* dtmain.c in Sources */,
 				41EDB16C12697D66002499A6 /* main.m in Sources */,
 			);
@@ -1981,6 +1981,7 @@
 				41EDB2A6126A386E002499A6 /* cload.c in Sources */,
 				41EDB2A7126A386E002499A6 /* draw.c in Sources */,
 				41EDB2A8126A386E002499A6 /* load.c in Sources */,
+				41EDB335126A40A4002499A6 /* screen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
