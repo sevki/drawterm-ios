@@ -720,7 +720,7 @@ titleForHeaderInSection:(NSInteger)section
 
 - (void)viewDidLoad
 {
-	[self setTitle:[NSString stringWithFormat:@"Drawterm (%s)\tServers", DRAWTERM_VERSION]];
+	[self setTitle:[NSString stringWithFormat:@"(%s) Servers", DRAWTERM_VERSION]];
 	[[self tableView] setRowHeight: 54.0]; // XXX check
 	[[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
 	UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
