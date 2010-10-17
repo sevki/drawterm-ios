@@ -674,7 +674,8 @@ titleForHeaderInSection:(NSInteger)section
 		_displayedObjects = [[NSMutableArray alloc] initWithCapacity: 0];
 		NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
 		NSArray *data = [ud objectForKey:@"connections"];
-		for (NSDictionary *condesc in data) {
+		NSDictionary *condesc;
+		for (condesc in data) {
 			Connection *con = [[Connection alloc] init];
 			for (NSString *key in condesc) {
 				NSString *val = [condesc objectForKey:key];
@@ -685,6 +686,7 @@ titleForHeaderInSection:(NSInteger)section
 				else if (![key compare: @"pass"]) con.pass = val;
 			}
 			[_displayedObjects addObject:con];
+			[con release];
 		}
 		
 	}
@@ -704,6 +706,7 @@ titleForHeaderInSection:(NSInteger)section
 	NSArray *uarr = [NSArray arrayWithArray:ma];
 	[ud setObject: uarr forKey: @"connections"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+	[ma release];
 }
 
 - (void)addObject:(id)anObject
@@ -743,20 +746,21 @@ titleForHeaderInSection:(NSInteger)section
 
 - (void)add
 {
-
-    DetailController *controller = [[DetailController alloc]
-                                      initWithStyle:UITableViewStyleGrouped];
+	UINavigationController *newNavController;
+	DetailController *controller = [[DetailController alloc]
+										initWithStyle:UITableViewStyleGrouped];
     
     id con = [[Connection alloc] init];
     [controller setCon:con];
     [controller setList:self];
     
-    UINavigationController *newNavController = [[UINavigationController alloc]
-                                                initWithRootViewController:controller];
+	newNavController = [[UINavigationController alloc]
+							initWithRootViewController:controller];
     
     [[self navigationController] presentModalViewController:newNavController
                                                    animated:YES];
     
+	[newNavController release];
     [con release];
     [controller release];
 
@@ -1048,6 +1052,8 @@ startcam()
 
 	ConViewController *rootViewController = [[ConViewController alloc] initWithStyle:UITableViewStylePlain];
 	UINavigationController *navcont = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+	[rootViewController release];
+	
 	[window addSubview:[navcont view]];
 
 /*
