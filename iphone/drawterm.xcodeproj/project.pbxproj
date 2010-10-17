@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		415D331E126B4B94004CB347 /* drawterm-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 415D331D126B4B8B004CB347 /* drawterm-Info.plist */; };
 		41EDAEA7126812B9002499A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EDAEA6126812B9002499A6 /* CoreGraphics.framework */; };
 		41EDAEA9126812B9002499A6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EDAEA8126812B9002499A6 /* CoreLocation.framework */; };
 		41EDAEAB126812B9002499A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EDAEAA126812B9002499A6 /* Foundation.framework */; };
@@ -379,6 +380,7 @@
 
 /* Begin PBXFileReference section */
 		1D6058910D05DD3D006BFB54 /* drawterm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drawterm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		415D331D126B4B8B004CB347 /* drawterm-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "drawterm-Info.plist"; sourceTree = "<group>"; };
 		41EDAEA6126812B9002499A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		41EDAEA8126812B9002499A6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		41EDAEAA126812B9002499A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -694,7 +696,6 @@
 		65ACC8F311BA8272000A2FC1 /* screen.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = screen.m; sourceTree = "<group>"; };
 		65ACC91D11BA8581000A2FC1 /* dtmain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dtmain.c; sourceTree = "<group>"; };
 		65D626C311C3ED4B000738CE /* dev-ios.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "dev-ios.c"; path = "../kern/dev-ios.c"; sourceTree = SOURCE_ROOT; };
-		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -839,8 +840,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				415D331D126B4B8B004CB347 /* drawterm-Info.plist */,
 				658033080F7D2213008AAFD3 /* 9ball.png */,
-				8D1107310486CEB800E47090 /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1635,6 +1636,7 @@
 				41EDB0DB12693835002499A6 /* debug.xcconfig in Resources */,
 				41EDB0DC12693835002499A6 /* drawtermVersion in Resources */,
 				41EDB0DD12693835002499A6 /* release.xcconfig in Resources */,
+				415D331E126B4B94004CB347 /* drawterm-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2407,6 +2409,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
 			};
 			name = Debug;
 		};
@@ -2420,7 +2423,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphoneos4.1;
 			};
 			name = Release;
 		};
