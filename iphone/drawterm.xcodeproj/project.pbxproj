@@ -2069,7 +2069,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../include";
-				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = drawterm;
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2087,7 +2086,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../include";
-				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = drawterm;
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
