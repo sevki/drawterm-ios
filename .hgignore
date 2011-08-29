@@ -3,9 +3,18 @@
 (^|/)\.hg($|/)
 (^|/)\.hgtags($|/)
 (^|/)build($|)
+(^|/)xcuserdata($|/)
 \.pbxuser$
 \.perspectivev3$
 ^drawterm.log$
 ^state$
 ^state.old$
 ^state.journal$
+
+syntax: glob
+*.pbproj/*.pbxuser
+*.xcodeproj/*.mode*
+*.xcodeproj/*.pbxuser
+*.xcodeproj/*.perspectivev3
+*.pbxindex*
+

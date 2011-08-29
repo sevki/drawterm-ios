@@ -515,9 +515,10 @@ static void *dt_thread(void *a)
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+	NSUInteger section;
     [super viewWillDisappear:animated];
     
-    for (NSUInteger section = 0; section < [[self tableView] numberOfSections]; section++)
+    for (section = 0; section < [[self tableView] numberOfSections]; section++)
     {
         NSUInteger indexes[] = { section, 0 };
         NSIndexPath *indexPath = [NSIndexPath indexPathWithIndexes:indexes
