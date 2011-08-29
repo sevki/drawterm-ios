@@ -10,20 +10,26 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>9ball.png</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>9ball_72x72.png</string>
+		<string>9ball_114x114.png</string>
+		<string>9ball_57x57.png</string>
+	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.${PRODUCT_NAME:identifier}</string>
+	<string>com.bell-labs.plan9.${PRODUCT_NAME:identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
-	<key>CFBundleShortVersionString</key>
-	<string>${DRAWTERM_VERSION}</string>
-	<key>CFBundleVersion</key>
-	<string>${DRAWTERM_VERSION}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>${DRAWTERM_VERSION}</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>${DRAWTERM_VERSION}</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
