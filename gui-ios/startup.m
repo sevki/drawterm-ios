@@ -20,6 +20,7 @@ void screen_touch_cancelled(void* touchid, float x, float y);
 void screen_touch_began(void* touchid, float x, float y);
 
 void sendaccel(float x, float y, float z);
+void sendcam(void *dat, int len, char *failed);
 void sendlocation(float x, float y, float altitude, float haccuracy, float vaccuracy, int failed); // Coordinates in WGS84
 void sendheading(float magheading, float trueheading, float accuracy, int failed);
 
@@ -409,7 +410,7 @@ enum {
 - (EditableDetailCell *)newDetailCellWithTag:(NSInteger)tag
 								   leftLabel:(NSString*)lbltxt
 {
-    EditableDetailCell *cell = [[EditableDetailCell alloc] initWithFrame:CGRectZero 
+    EditableDetailCell *cell = [[EditableDetailCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                          reuseIdentifier:nil];
     [[cell textField] setDelegate:self];
     [[cell textField] setTag:tag];
