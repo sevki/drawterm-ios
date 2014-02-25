@@ -7,9 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		412C950A140BCE8C005FF747 /* 9ball_72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 412C9509140BCE8C005FF747 /* 9ball_72x72.png */; };
-		412C950C140BCFDC005FF747 /* 9ball_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 412C950B140BCFDC005FF747 /* 9ball_114x114.png */; };
-		412C950E140BD011005FF747 /* 9ball_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 412C950D140BD011005FF747 /* 9ball_57x57.png */; };
+		416ACDD618BD3BF200B82EE3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDD518BD3BF200B82EE3 /* Default-568h@2x.png */; };
+		416ACDE218BD4B7B00B82EE3 /* 9ball_29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDD718BD4B7B00B82EE3 /* 9ball_29x29.png */; };
+		416ACDE318BD4B7B00B82EE3 /* 9ball_40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDD818BD4B7B00B82EE3 /* 9ball_40x40.png */; };
+		416ACDE418BD4B7B00B82EE3 /* 9ball_50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDD918BD4B7B00B82EE3 /* 9ball_50x50.png */; };
+		416ACDE518BD4B7B00B82EE3 /* 9ball_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDDA18BD4B7B00B82EE3 /* 9ball_57x57.png */; };
+		416ACDE618BD4B7B00B82EE3 /* 9ball_58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDDB18BD4B7B00B82EE3 /* 9ball_58x58.png */; };
+		416ACDE718BD4B7B00B82EE3 /* 9ball_72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDDC18BD4B7B00B82EE3 /* 9ball_72x72.png */; };
+		416ACDE818BD4B7B00B82EE3 /* 9ball_80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDDD18BD4B7B00B82EE3 /* 9ball_80x80.png */; };
+		416ACDE918BD4B7B00B82EE3 /* 9ball_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDDE18BD4B7B00B82EE3 /* 9ball_100x100.png */; };
+		416ACDEA18BD4B7B00B82EE3 /* 9ball_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDDF18BD4B7B00B82EE3 /* 9ball_114x114.png */; };
+		416ACDEB18BD4B7B00B82EE3 /* 9ball_120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDE018BD4B7B00B82EE3 /* 9ball_120x120.png */; };
+		416ACDEC18BD4B7B00B82EE3 /* 9ball_152x152.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDE118BD4B7B00B82EE3 /* 9ball_152x152.png */; };
+		416ACDEE18BD4C4700B82EE3 /* 9ball_76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDED18BD4C4700B82EE3 /* 9ball_76x76.png */; };
+		416ACDF018BD4CD400B82EE3 /* 9ball_144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACDEF18BD4CD400B82EE3 /* 9ball_144x144.png */; };
 		41EDAEA7126812B9002499A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EDAEA6126812B9002499A6 /* CoreGraphics.framework */; };
 		41EDAEA9126812B9002499A6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EDAEA8126812B9002499A6 /* CoreLocation.framework */; };
 		41EDAEAB126812B9002499A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EDAEAA126812B9002499A6 /* Foundation.framework */; };
@@ -382,11 +393,22 @@
 
 /* Begin PBXFileReference section */
 		1D6058910D05DD3D006BFB54 /* drawterm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drawterm.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		412C9509140BCE8C005FF747 /* 9ball_72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9ball_72x72.png; sourceTree = "<group>"; };
-		412C950B140BCFDC005FF747 /* 9ball_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9ball_114x114.png; sourceTree = "<group>"; };
-		412C950D140BD011005FF747 /* 9ball_57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9ball_57x57.png; sourceTree = "<group>"; };
 		412C950F140BD403005FF747 /* drawterm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = drawterm.entitlements; sourceTree = "<group>"; };
 		415D331D126B4B8B004CB347 /* drawterm-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "drawterm-Info.plist"; sourceTree = "<group>"; };
+		416ACDD518BD3BF200B82EE3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		416ACDD718BD4B7B00B82EE3 /* 9ball_29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_29x29.png; path = "../gui-ios/9ball_29x29.png"; sourceTree = "<group>"; };
+		416ACDD818BD4B7B00B82EE3 /* 9ball_40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_40x40.png; path = "../gui-ios/9ball_40x40.png"; sourceTree = "<group>"; };
+		416ACDD918BD4B7B00B82EE3 /* 9ball_50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_50x50.png; path = "../gui-ios/9ball_50x50.png"; sourceTree = "<group>"; };
+		416ACDDA18BD4B7B00B82EE3 /* 9ball_57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_57x57.png; path = "../gui-ios/9ball_57x57.png"; sourceTree = "<group>"; };
+		416ACDDB18BD4B7B00B82EE3 /* 9ball_58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_58x58.png; path = "../gui-ios/9ball_58x58.png"; sourceTree = "<group>"; };
+		416ACDDC18BD4B7B00B82EE3 /* 9ball_72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_72x72.png; path = "../gui-ios/9ball_72x72.png"; sourceTree = "<group>"; };
+		416ACDDD18BD4B7B00B82EE3 /* 9ball_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_80x80.png; path = "../gui-ios/9ball_80x80.png"; sourceTree = "<group>"; };
+		416ACDDE18BD4B7B00B82EE3 /* 9ball_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_100x100.png; path = "../gui-ios/9ball_100x100.png"; sourceTree = "<group>"; };
+		416ACDDF18BD4B7B00B82EE3 /* 9ball_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_114x114.png; path = "../gui-ios/9ball_114x114.png"; sourceTree = "<group>"; };
+		416ACDE018BD4B7B00B82EE3 /* 9ball_120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_120x120.png; path = "../gui-ios/9ball_120x120.png"; sourceTree = "<group>"; };
+		416ACDE118BD4B7B00B82EE3 /* 9ball_152x152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_152x152.png; path = "../gui-ios/9ball_152x152.png"; sourceTree = "<group>"; };
+		416ACDED18BD4C4700B82EE3 /* 9ball_76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_76x76.png; path = "../gui-ios/9ball_76x76.png"; sourceTree = "<group>"; };
+		416ACDEF18BD4CD400B82EE3 /* 9ball_144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 9ball_144x144.png; path = "../gui-ios/9ball_144x144.png"; sourceTree = "<group>"; };
 		41EDAEA6126812B9002499A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		41EDAEA8126812B9002499A6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		41EDAEAA126812B9002499A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -829,6 +851,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				416ACDD518BD3BF200B82EE3 /* Default-568h@2x.png */,
 				412C950F140BD403005FF747 /* drawterm.entitlements */,
 				41EDB15012697A56002499A6 /* README.iOS */,
 				41EDB0D712693835002499A6 /* config */,
@@ -849,9 +872,19 @@
 			children = (
 				415D331D126B4B8B004CB347 /* drawterm-Info.plist */,
 				658033080F7D2213008AAFD3 /* 9ball.png */,
-				412C950D140BD011005FF747 /* 9ball_57x57.png */,
-				412C9509140BCE8C005FF747 /* 9ball_72x72.png */,
-				412C950B140BCFDC005FF747 /* 9ball_114x114.png */,
+				416ACDD718BD4B7B00B82EE3 /* 9ball_29x29.png */,
+				416ACDD818BD4B7B00B82EE3 /* 9ball_40x40.png */,
+				416ACDD918BD4B7B00B82EE3 /* 9ball_50x50.png */,
+				416ACDDA18BD4B7B00B82EE3 /* 9ball_57x57.png */,
+				416ACDDB18BD4B7B00B82EE3 /* 9ball_58x58.png */,
+				416ACDDC18BD4B7B00B82EE3 /* 9ball_72x72.png */,
+				416ACDED18BD4C4700B82EE3 /* 9ball_76x76.png */,
+				416ACDDD18BD4B7B00B82EE3 /* 9ball_80x80.png */,
+				416ACDDE18BD4B7B00B82EE3 /* 9ball_100x100.png */,
+				416ACDDF18BD4B7B00B82EE3 /* 9ball_114x114.png */,
+				416ACDE018BD4B7B00B82EE3 /* 9ball_120x120.png */,
+				416ACDEF18BD4CD400B82EE3 /* 9ball_144x144.png */,
+				416ACDE118BD4B7B00B82EE3 /* 9ball_152x152.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1645,13 +1678,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				416ACDEE18BD4C4700B82EE3 /* 9ball_76x76.png in Resources */,
+				416ACDE818BD4B7B00B82EE3 /* 9ball_80x80.png in Resources */,
+				416ACDE918BD4B7B00B82EE3 /* 9ball_100x100.png in Resources */,
+				416ACDF018BD4CD400B82EE3 /* 9ball_144x144.png in Resources */,
+				416ACDE618BD4B7B00B82EE3 /* 9ball_58x58.png in Resources */,
 				658033090F7D2213008AAFD3 /* 9ball.png in Resources */,
+				416ACDEA18BD4B7B00B82EE3 /* 9ball_114x114.png in Resources */,
+				416ACDE518BD4B7B00B82EE3 /* 9ball_57x57.png in Resources */,
 				41EDB0DB12693835002499A6 /* debug.xcconfig in Resources */,
 				41EDB0DC12693835002499A6 /* drawtermVersion in Resources */,
+				416ACDEC18BD4B7B00B82EE3 /* 9ball_152x152.png in Resources */,
+				416ACDE218BD4B7B00B82EE3 /* 9ball_29x29.png in Resources */,
 				41EDB0DD12693835002499A6 /* release.xcconfig in Resources */,
-				412C950A140BCE8C005FF747 /* 9ball_72x72.png in Resources */,
-				412C950C140BCFDC005FF747 /* 9ball_114x114.png in Resources */,
-				412C950E140BD011005FF747 /* 9ball_57x57.png in Resources */,
+				416ACDE718BD4B7B00B82EE3 /* 9ball_72x72.png in Resources */,
+				416ACDE318BD4B7B00B82EE3 /* 9ball_40x40.png in Resources */,
+				416ACDD618BD3BF200B82EE3 /* Default-568h@2x.png in Resources */,
+				416ACDEB18BD4B7B00B82EE3 /* 9ball_120x120.png in Resources */,
+				416ACDE418BD4B7B00B82EE3 /* 9ball_50x50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2403,11 +2447,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41EDB0D812693835002499A6 /* debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DRAWTERM_VERSION = 0.5.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos5.0;
+				SDKROOT = iphoneos7.0;
+				VALID_ARCHS = "armv7 armv7s";
+				"VALID_ARCHS[sdk=*]" = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -2415,10 +2462,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41EDB0DA12693835002499A6 /* release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DRAWTERM_VERSION = 0.5.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				SDKROOT = iphoneos5.0;
+				SDKROOT = iphoneos7.0;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
