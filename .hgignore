@@ -17,4 +17,4 @@ syntax: glob
 *.xcodeproj/*.pbxuser
 *.xcodeproj/*.perspectivev3
 *.pbxindex*
-
+iphone/DerivedData/*
