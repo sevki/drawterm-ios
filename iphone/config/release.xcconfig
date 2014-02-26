@@ -1,5 +1,2 @@
-#include "drawtermVersion"
+#include "drawterm.config"
 
-INFOPLIST_FILE = drawterm-Info.plist
-
-OTHER_CFLAGS= $(OTHER_CFLAGS) -DPTHREAD -DDRAWTERM_VERSION=\"$DRAWTERM_VERSION\"
