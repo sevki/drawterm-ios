@@ -8,33 +8,6 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>9ball_58x58</string>
-		<string>9ball_80x80</string>
-		<string>9ball_29x29</string>
-		<string>9ball_120x120</string>
-		<string>9ball_114x114</string>
-		<string>9ball_72x72.png</string>
-		<string>9ball_114x114.png</string>
-		<string>9ball_57x57.png</string>
-	</array>
-	<key>CFBundleIconFiles~ipad</key>
-	<array>
-		<string>9ball_58x58</string>
-		<string>9ball_29x29</string>
-		<string>9ball_80x80</string>
-		<string>9ball_40x40</string>
-		<string>9ball_100x100</string>
-		<string>9ball_50x50</string>
-		<string>9ball_152x152</string>
-		<string>9ball_76x76</string>
-		<string>9ball_120x120</string>
-		<string>9ball_114x114</string>
-		<string>9ball_72x72.png</string>
-		<string>9ball_114x114.png</string>
-		<string>9ball_57x57.png</string>
-	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.bell-labs.plan9.${PRODUCT_NAME:identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
