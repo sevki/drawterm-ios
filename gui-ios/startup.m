@@ -40,7 +40,7 @@ int dt_main(int argc, char *argv[]);
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
 - (void)textFieldDidEndEditing:(UITextField *)textField;
--  (BOOL)textFieldShouldBeginEditing:(UITextField *)textField;
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField;
 - (BOOL)textFieldShouldClear:(UITextField *)textField;
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
@@ -54,6 +54,7 @@ int dt_main(int argc, char *argv[]);
 }
 - (void) pleaseRedraw;
 //- (BOOL)canBecomeFirstResponder;
+- (void)toggleKey;
 
 @end
 
@@ -87,22 +88,29 @@ int dt_main(int argc, char *argv[]);
 
 @implementation TermView
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (id)initWithFrame:(CGRect)frame
 {
-	return NO;
+	self = [super initWithFrame:frame];
+    if (self != nil) {
+        [self commonInit];
+    }
+	return self;
 }
 
-- (id)initWithFrame:(CGRect)r
+- (void)commonInit
 {
-	self = [super initWithFrame:r];
-	[self setDelegate: [[TermViewDelegate alloc] init]];
+    [self setDelegate: [[TermViewDelegate alloc] init]];
 	self.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.multipleTouchEnabled = YES;
 	//self.exclusiveTouch = YES;
 	
 	//self.delegate = self;
-//	NSLog(@"old delegate: %@\n", self.delegate);
-	return self;
+    //	NSLog(@"old delegate: %@\n", self.delegate);
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return NO;
 }
 
 - (void)drawRect:(CGRect)rect {	
@@ -112,7 +120,7 @@ int dt_main(int argc, char *argv[]);
 
 }
 
-- (void) toggleKey
+- (void)toggleKey
 {
 	if([self isFirstResponder])
 		[self resignFirstResponder];
@@ -121,7 +129,7 @@ int dt_main(int argc, char *argv[]);
 
 }
 
-- (void) pleaseRedraw
+- (void)pleaseRedraw
 {
 	//NSLog(@"pleaseRedraw\n");
 	[self setNeedsDisplay];
@@ -431,12 +439,12 @@ enum {
 {
 	[[self list] addObject:[self con]];
 	[[self list] save];
-	[self dismissModalViewControllerAnimated:YES];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)cancel
 {
-	[self dismissModalViewControllerAnimated:YES];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 static char *nargv[] = {"drawterm","-c","127.0.0.1","-a","127.0.0.1","-u","glenda",NULL};
@@ -458,10 +466,10 @@ static void *dt_thread(void *a)
 	nargv[6] = strdup([self.con.user UTF8String]);
 	userpass = strdup([self.con.pass UTF8String]);
 
-	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 //	[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeRight animated:YES];
 	[self.view removeFromSuperview];
-	[self.navigationController setNavigationBarHidden: YES];
+	[self.navigationController setNavigationBarHidden:YES];
 	//[uiview becomeFirstResponder];
 
 	pthread_create(&t, NULL, dt_thread, NULL);
@@ -642,7 +650,6 @@ titleForHeaderInSection:(NSInteger)section
     return cell;
 }
 
-
 @end
 	
 @implementation ConViewController
@@ -759,8 +766,9 @@ titleForHeaderInSection:(NSInteger)section
 	newNavController = [[UINavigationController alloc]
 							initWithRootViewController:controller];
     
-    [[self navigationController] presentModalViewController:newNavController
-                                                   animated:YES];
+    [[self navigationController] presentViewController:newNavController
+                                              animated:YES
+                                            completion:nil];
     
 	[newNavController release];
     [con release];
