@@ -4,6 +4,7 @@
 (^|/)\.hgtags($|/)
 (^|/)build($|)
 (^|/)xcuserdata($|/)
+(^|/)project\.xcworkspace($|/)
 \.pbxuser$
 \.perspectivev3$
 ^drawterm.log$
