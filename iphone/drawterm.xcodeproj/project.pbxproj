@@ -901,9 +901,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				41EDB15012697A56002499A6 /* README.iOS */,
 				416ACE2518BD91BA00B82EE3 /* Default-568h@2x.png */,
 				412C950F140BD403005FF747 /* drawterm.entitlements */,
-				41EDB15012697A56002499A6 /* README.iOS */,
 				41EDB0D712693835002499A6 /* config */,
 				65D626C311C3ED4B000738CE /* dev-ios.c */,
 				65ACC6F911BA4B6C000A2FC1 /* gui-ios */,
@@ -2242,8 +2242,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = drawterm;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../kern";
 			};
 			name = Debug;
@@ -2257,8 +2259,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = drawterm;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../kern";
 			};
 			name = Release;
