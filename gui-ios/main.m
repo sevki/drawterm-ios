@@ -21,4 +21,9 @@ main(int argc, char **argv)
     [pool drain];
 
     return retVal;
+/*
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([DTAppDelegate class]));
+    }
+*/
 }

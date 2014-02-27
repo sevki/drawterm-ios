@@ -92,27 +92,18 @@ int dt_main(int argc, char *argv[]) {
 	
 	if(bind("#c", "/dev", MBEFORE) < 0)
 		panic("bind #c: %r");
-	
 	if(bind("#m", "/dev", MBEFORE) < 0)
 		panic("bind #m: %r");
-	// the draw device is not read yet: screeninit!
-	
 	if(bind("#i", "/dev", MBEFORE) < 0)
 		panic("bind #i: %r");
-	
-	
 	if(bind("#I", "/net", MBEFORE) < 0)
 		panic("bind #I: %r");
-	
 	if(bind("#U", "/", MAFTER) < 0)
 		panic("bind #U: %r");
-	bind("#A", "/dev", MAFTER);
 
-	
+	bind("#A", "/dev", MAFTER);
 	bind("#z", "/dev", MBEFORE);
-	
-	//printf("%s\n", eve);
-	
+		
 	if(open("/dev/cons", OREAD) != 0)
 		panic("open0: %r");
 	if(open("/dev/cons", OWRITE) != 1)
