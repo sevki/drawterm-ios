@@ -15,7 +15,6 @@
 		416ACE2218BD74E900B82EE3 /* libip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 416ACDF518BD638000B82EE3 /* libip.a */; };
 		416ACE2418BD886900B82EE3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 416ACE2318BD886900B82EE3 /* Images.xcassets */; };
 		416ACE2618BD91BA00B82EE3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 416ACE2518BD91BA00B82EE3 /* Default-568h@2x.png */; };
-		416ACE7218BE48C200B82EE3 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 416ACE6D18BE48C200B82EE3 /* Makefile */; };
 		416ACE7318BE48C200B82EE3 /* getcallerpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 416ACE6E18BE48C200B82EE3 /* getcallerpc.c */; };
 		416ACE7618BE48C200B82EE3 /* tas.c in Sources */ = {isa = PBXBuildFile; fileRef = 416ACE7118BE48C200B82EE3 /* tas.c */; };
 		41EDAEA7126812B9002499A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EDAEA6126812B9002499A6 /* CoreGraphics.framework */; };
@@ -1740,7 +1739,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				416ACE7218BE48C200B82EE3 /* Makefile in Sources */,
 				416ACE7618BE48C200B82EE3 /* tas.c in Sources */,
 				658036B90F7D3547008AAFD3 /* posix-factotum.c in Sources */,
 				658036CA0F7D36AA008AAFD3 /* latin1.c in Sources */,
